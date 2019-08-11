@@ -23,7 +23,7 @@ This PHP utility enables you to flush all cache of multiple W3TC-powered website
 
 /home/your-website.com/ --- your website, or more generally, a path that's publicly accessible
 -> move the file 'control-panel-access.php' here. It will now be accessible under http://your-website.com/control-panel-access.php
--> make sure you change username & password in that file to something else than the standard
+-> make sure you change the password in that file to something else than the standard
 
 /home/website-to-flush.com/ --- any publicly available website you'd like to flush, it can also be on another server!
 -> move a copy of flush-script.php here
