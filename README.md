@@ -32,7 +32,7 @@ This PHP utility enables you to flush all cache of multiple W3TC-powered website
 ### Set up domains in the JSON file
 You can see examples in the JSON file. The third example is for a website using http digest authentication.
 
-### Screenshots
+## Screenshots
 Login Screen:
 ![Login Screen](https://github.com/web-butler/w3tc-remote-flush-multiple/blob/master/1-login-screen.png?raw=true)
 
