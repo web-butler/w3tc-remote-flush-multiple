@@ -33,4 +33,4 @@ This PHP utility enables you to flush all cache of multiple W3TC-powered website
 You can see examples in the JSON file. The third example is for a website using http digest authentication.
 
 ## Enjoy!
-If you have any questions, don't hesitate to contact us at web-butler.ch.
+If you have any questions, don't hesitate to contact us at https://web-butler.ch.
