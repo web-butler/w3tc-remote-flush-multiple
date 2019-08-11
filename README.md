@@ -1,4 +1,4 @@
-# W3TC Remote Flush Multiple Websites
+# W3TC Remote Flush Multiple Websites (W3 Total Cache)
 This PHP utility enables you to flush all cache of multiple W3TC-powered websites from one control panel that is password-protected.
 
 ## Requirements
