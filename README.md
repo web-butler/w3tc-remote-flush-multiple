@@ -32,5 +32,7 @@ This PHP utility enables you to flush all cache of multiple W3TC-powered website
 ### Set up domains in the JSON file
 You can see examples in the JSON file. The third example is for a website using http digest authentication.
 
+### Check out the screenshots (PNG files in this folder) to see how it should look like
+
 ## Enjoy!
 If you have any questions, don't hesitate to contact us at https://web-butler.ch.
