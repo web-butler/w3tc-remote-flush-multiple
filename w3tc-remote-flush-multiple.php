@@ -103,7 +103,7 @@ if (!$toFlush) {
             $username = $array[1];
             $password = $array[2];
         }
-        $url = 'http://' . $page . '/flush-script.php?pass=password';
+        $url = 'https://' . $page . '/flush-script.php?pass=password';
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30); // set max. execution time for the curl
         curl_setopt($ch, CURLOPT_POST, 1); // require post
