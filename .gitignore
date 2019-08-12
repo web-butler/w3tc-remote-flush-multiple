@@ -1,19 +1,22 @@
-*.log
-wp-config.php
-wp-content/advanced-cache.php
-wp-content/backup-db/
-wp-content/backups/
-wp-content/blogs.dir/
-wp-content/cache/
-wp-content/upgrade/
-wp-content/uploads/
-wp-content/mu-plugins/
-wp-content/wp-cache-config.php
-wp-content/plugins/hello.php
+# Folder view configuration files
+.DS_Store
+Desktop.ini
 
-/.htaccess
-/license.txt
-/readme.html
-/sitemap.xml
-/sitemap.xml.gz
+# Thumbnail cache files
+._*
+Thumbs.db
 
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# Compiled Python files
+*.pyc
+
+# Compiled C++ files
+*.out
+
+# Application specific files
+venv
+node_modules
+.sass-cache
