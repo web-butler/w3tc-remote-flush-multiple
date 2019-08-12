@@ -54,7 +54,8 @@ echo "<html>
     </head>
     <body>
     <div class='container' id='main-content'>
-    <h1>Flush W3TC Cache remotely</h1>";
+    <h1>Flush W3TC Cache remotely</h1>
+    <p>..powered by:  <a href='https://web-butler.ch/' target='_blank'>webButler</a></p>";
 
 // retrieve information about what needs to be flushed
 $toFlush = $_GET;
@@ -68,8 +69,7 @@ function startsWith ($string, $startString)
 
 // if nothing was chosen to be flushed, create form to choose what needs to be flushed
 if (!$toFlush) {
-    echo "<p>..powered by:  <a href='https://web-butler.ch/' target='_blank'>webButler</a></p>
-    <h2>Choose the website(s) to flush</h2>
+    echo "<h2>Choose the website(s) to flush</h2>
 	<p>Caution: it's wiser to choose only one website at a time! (when do you really need to flush several websites at once?)</p>
     <div class='columns'>
     <form action=''>";
