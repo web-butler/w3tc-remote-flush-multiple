@@ -34,13 +34,13 @@ You can see examples in the JSON file. The third example is for a website using 
 
 ## Screenshots
 Login Screen:
-![Login Screen](https://github.com/web-butler/w3tc-remote-flush-multiple/blob/master/1-login-screen.png?raw=true)
+![Login Screen](https://github.com/web-butler/w3tc-remote-flush-multiple/blob/master/screenshots/1-login-screen.png?raw=true)
 
 Flush Screen:
-![Login Screen](https://github.com/web-butler/w3tc-remote-flush-multiple/blob/master/2-flush-screen.png?raw=true)
+![Login Screen](https://github.com/web-butler/w3tc-remote-flush-multiple/blob/master/screenshots/2-flush-screen.png?raw=true)
 
 Result Screen:
-![Login Screen](https://github.com/web-butler/w3tc-remote-flush-multiple/blob/master/3-result-screen.png?raw=true)
+![Login Screen](https://github.com/web-butler/w3tc-remote-flush-multiple/blob/master/screenshots/3-result-screen.png?raw=true)
 
 ## Enjoy!
 If you have any questions, don't hesitate to contact us at https://web-butler.ch.
