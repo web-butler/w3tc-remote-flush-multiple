@@ -4,7 +4,6 @@
  * Developed by webButler (https://web-butler.ch)
  */
 ignore_user_abort(false);
-set_time_limit(30);
 
 $pathToFlushControl = "../w3tc-remote-flush-multiple.php";
 $correctPassword = 'password';
