@@ -6,10 +6,13 @@
 ignore_user_abort(false);
 set_time_limit(30);
 
+$flushScriptPassword = 'password';
+
 // retrieve information about which websites need to be flushed
 if (isset($_POST)) {
     $websitesToFlush = $_POST;
 }
+
 // Generate an object with websites and IDs from the JSON file
 // (relative to flush-admin-access.php , cause that's where it's being executed)
 $jsonFile = file_get_contents('../websites.json'); 
@@ -59,7 +62,7 @@ function doCurl($page,$key) {
         $username = $stagingArray[1];
         $password = $stagingArray[2];
     }
-    $url = 'https://' . $page . '/flush-script.php?password=password';
+    $url = 'https://'.$page.'/flush-script.php?password='.$flushScriptPassword;
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_TIMEOUT, 30); // set max. execution time for the curl
     curl_setopt($ch, CURLOPT_POST, 1); // require post
