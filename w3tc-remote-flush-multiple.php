@@ -62,6 +62,7 @@ function doCurl($page,$key) {
         $username = $stagingArray[1];
         $password = $stagingArray[2];
     }
+    global $flushScriptPassword;
     $url = 'https://'.$page.'/flush-script.php?password='.$flushScriptPassword;
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_TIMEOUT, 30); // set max. execution time for the curl
