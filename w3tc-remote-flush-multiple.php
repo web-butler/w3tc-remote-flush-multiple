@@ -12,7 +12,7 @@ if (isset($_POST)) {
 }
 // Generate an object with websites and IDs from the JSON file
 // (relative to flush-admin-access.php , cause that's where it's being executed)
-$jsonFile = file_get_contents('../w3tc-remote-flush-multiple/websites.json'); 
+$jsonFile = file_get_contents('../websites.json'); 
 $websiteArray = json_decode( $jsonFile, true );
 
 // define startsWith to filter stage envs (will output true if string starts with startString)
@@ -22,26 +22,27 @@ function startsWith ($string, $startString)
     return (substr($string, 0, $len) === $startString); 
 } 
 
+// in case the page is a stage and has page url, user, and pass as array as value, choose the page
+function createCheckboxes($pageOrArray,$key) {
+    if (is_array($pageOrArray)) {
+        $page = $pageOrArray[0];
+    } else {
+        $page = $pageOrArray;
+    }
+    echo "<label><input type='checkbox' name='";
+    echo $key;
+    echo "' value='";
+    echo $page;
+    echo "'>";
+    echo $page;
+    echo "</label><br />";
+}
+
 function createFlushForm() {
     echo "<h2>Choose the website(s) to flush</h2>
     <p>Caution: it's wiser to choose only one website at a time! (when do you really need to flush several websites at once?)</p>
     <div class='columns'>
     <form action='' method='post'>";
-    // in case the page is a stage and has page url, user, and pass as array as value, choose the page
-    function createCheckboxes($pageOrArray,$key) {
-        if (is_array($pageOrArray)) {
-            $page = $pageOrArray[0];
-        } else {
-            $page = $pageOrArray;
-        }
-        echo "<label><input type='checkbox' name='";
-        echo $key;
-        echo "' value='";
-        echo $page;
-        echo "'>";
-        echo $page;
-        echo "</label><br />";
-    }
     global $websiteArray;
     array_walk($websiteArray,"createCheckboxes"); // throws the array into the function for each element
     echo "</div>
@@ -49,45 +50,46 @@ function createFlushForm() {
     </form>";
 }
 
+function doCurl($page,$key) {
+    $isStaging = startsWith($page,'stage.');
+    // in case the page is a stage and has page url, user, and pass as array as value, assign variables accordingly
+    if ($isStaging) {
+        global $websiteArray;
+        $stagingArray = $websiteArray[$key];
+        $username = $stagingArray[1];
+        $password = $stagingArray[2];
+    }
+    $url = 'https://' . $page . '/flush-script.php?password=password';
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 30); // set max. execution time for the curl
+    curl_setopt($ch, CURLOPT_POST, 1); // require post
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // make curl_exec return instead of output data
+    echo '<p>';
+    // check if the site is a stage, and if so, add user and password
+    if ($isStaging) {
+        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);
+        curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
+        echo "[http digest auth] ";
+    }
+    // this line executes curl and postes the script output (http result) of the executed url
+    $curl_result = curl_exec($ch);
+    $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE); // store http status
+    if ($http_status != 200) {
+        echo 'Error'; // if curl doesn't return http status 200, print 'Error'
+    } else {
+        echo $curl_result; // otherwise print text in remote script (here: 'Script executed')
+    };
+    echo ' with a http status of ';
+    echo $http_status;
+    echo ' on ';
+    // add the url and a link to the website
+    echo '<a href="https://'.$page.'" target="_blank">'.$page.'<a/>';
+    echo '</p>';
+    curl_close($ch);
+}
+
 function flushWebsites() {
     echo "<h2>Results are here:</h2>";
-    function doCurl($page,$key) {
-        $isStaging = startsWith($page,'stage.');
-        // in case the page is a stage and has page url, user, and pass as array as value, assign variables accordingly
-        if ($isStaging) {
-            global $websiteArray;
-            $stagingArray = $websiteArray[$key];
-            $username = $stagingArray[1];
-            $password = $stagingArray[2];
-        }
-        $url = 'https://' . $page . '/flush-script.php?pass=password';
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30); // set max. execution time for the curl
-        curl_setopt($ch, CURLOPT_POST, 1); // require post
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // make curl_exec return instead of output data
-        echo '<p>';
-        // check if the site is a stage, and if so, add user and password
-        if ($isStaging) {
-            curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);
-            curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
-            echo "[http digest auth] ";
-        }
-        // this line executes curl and postes the script output (http result) of the executed url
-        $curl_result = curl_exec($ch);
-        $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE); // store http status
-        if ($http_status != 200) {
-            echo 'Error'; // if curl doesn't return http status 200, print 'Error'
-        } else {
-            echo $curl_result; // otherwise print text in remote script (here: 'Script executed')
-        };
-        echo ' with a http status of ';
-        echo $http_status;
-        echo ' on ';
-        // add the url and a link to the website
-        echo '<a href="https://'.$page.'" target="_blank">'.$page.'<a/>';
-        echo '</p>';
-        curl_close($ch);
-    }
     global $websitesToFlush;
     array_walk($websitesToFlush,"doCurl"); // throws the array into the function for each element
 echo "<form action=''>

@@ -6,7 +6,7 @@
 ignore_user_abort(false);
 set_time_limit(30);
 
-$pathToFlushControl = "../w3tc-remote-flush-multiple/w3tc-remote-flush-multiple.php";
+$pathToFlushControl = "../w3tc-remote-flush-multiple.php";
 $correctPassword = 'password';
 $cookieName = 'WEB_BUTLER_W3TC_FLUSH';
 $browserCookie = '';

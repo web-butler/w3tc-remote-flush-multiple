@@ -4,11 +4,11 @@
  * Developed by webButler (https://web-butler.ch)
  * @package WordPress
  */
-$pass = $_GET['pass'];
-if($pass != 'password') {
+$password = $_GET['password'];
+if($password !== 'password') {
   header('Location: /404');
 }
-ignore_user_abort( true );
+ignore_user_abort(true);
 
 include('wp-load.php');
 w3tc_flush_all();
